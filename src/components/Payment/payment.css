@@ -1,0 +1,134 @@
+.payment-container {
+    min-height: 100vh;
+    background-color: white;
+    padding: 2rem 1rem;
+}
+
+.payment-card {
+    max-width: 42rem;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.payment-header {
+    background-color: #dc2626;
+    color: white;
+    padding: 1.5rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.payment-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.payment-content {
+    padding: 1.5rem;
+}
+
+.order-summary {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+.summary-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.payment-option:hover {
+    background-color: #f9fafb;
+}
+
+.payment-radio {
+    margin-right: 0.75rem;
+}
+
+.option-title {
+    font-weight: 600;
+}
+
+.option-description {
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.submit-container {
+    margin-top: 2rem;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    color: white;
+    background-color: #dc2626;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.submit-button:hover:not(.disabled) {
+    background-color: #b91c1c;
+}
+
+.submit-button.disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.payment-radio {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .payment-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .payment-card {
+        max-width: 100%;
+    }
+
+    .payment-header {
+        padding: 1rem;
+    }
+
+    .payment-content {
+        padding: 1rem;
+    }
+}

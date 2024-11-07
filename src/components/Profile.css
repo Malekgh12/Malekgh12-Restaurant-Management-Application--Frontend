@@ -1,0 +1,50 @@
+.container.profile {
+    width: 80%;
+    margin: 99px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .profile-content {
+    text-align: left; /* Assure que le texte est aligné à gauche */
+  }
+  
+  .profile-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Aligne verticalement au centre */
+    gap: 20px; /* Espace entre les éléments Email et Role */
+  }
+  
+  .info-container p {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .role-container {
+    display: ruby;
+    flex-direction: column;
+    align-items: flex-start; /* Aligne les éléments de la liste à gauche */
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    padding: 5px 0;
+  }
+  
+  h3{
+    text-align: center;
+  }

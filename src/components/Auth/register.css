@@ -1,0 +1,15 @@
+.card.card-container.register {
+    max-width: 555px !important;
+    padding: 20px 27px;
+    margin-top: auto;
+}
+
+
+button.btn.btn-block {
+    background-color: #666666;
+    padding: 13px;
+    margin-top: 12px;
+}
+.form-group {
+    margin: 12px;
+}
