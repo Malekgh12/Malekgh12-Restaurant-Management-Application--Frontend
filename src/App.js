@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import "./App.css";
 import logo from './assets/image/img.png';
+import authService from "./Service/auth.service";
 
 import Login from "./components/Auth/login.component";
 import Register from "./components/Auth/register.component";
@@ -9,9 +10,12 @@ import AddReservation from "./components/Reservation/AddReservation";
 import Menu from "./components/Menu/menu";
 import Payment from "./components/Payment/payment";
 import Profile from "./components/Profile.component";
-import BoardUser from "./components/board-admin.component";
+import Home from "./components/home.component";
+import BoardUser from"./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
+import eventBus from "./common/EventBus";
 import { FaPhoneAlt, FaEnvelope, FaGraduationCap, FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn  } from 'react-icons/fa';
+
 // Import Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'remixicon/fonts/remixicon.css';
@@ -21,14 +25,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.logOut = this.logOut.bind(this);
     this.state = {
       showAdminBoard: false,
       showUserBoard: false,
       currentUser: undefined,
     };
+  }
+  componentDidMount() {
+    const user = authService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showUserBoard: user.roles.includes("ROLE_USER"),
+      });
+    }
+    
+    eventBus.on("logout", () => {
+      this.logOut();
+    });
+  }
+
+  componentWillUnmount() {
+    eventBus.remove("logout");
   }
   logOut(){
     localStorage.removeItem("user"); 
@@ -134,11 +157,11 @@ class App extends React.Component {
 
         <div className="container mt-3">
           <Routes>
-            {/* Redirect root path to login */}
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/Auth/login" />} />
+            <Route path="/Auth/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/Profile" element={<Profile/>}/>
+            <Route path="/profil" element={Profile} />
+            <Route path="/home" element={<Home/>}/>
             <Route path="/user" element={< BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path="/addReservation" element={<AddReservation />} />
@@ -146,8 +169,6 @@ class App extends React.Component {
             <Route path="/Payment" element={<Payment/>}/>
           </Routes>
         </div>
-
-        {/* <AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }

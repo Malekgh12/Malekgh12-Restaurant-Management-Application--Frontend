@@ -17,9 +17,15 @@
   .card-container h3 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #0b0b0b;
     text-align: center;
   }
+  .card-container h2,
+.card-container h5 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+  
   
   /* Style pour les groupes de formulaires */
   .form-group {
@@ -30,7 +36,7 @@
   .form-group label {
     font-size: 14px;
     font-weight: 600;
-    color: #555;
+    color: #070707;
     display: block;
     margin-bottom: 8px;
   }
@@ -42,25 +48,29 @@
     padding: 10px;
     font-size: 14px;
     width: 100%;
+    border-color: #b91c1c;
+  }
+
+  .form-control:focus{
+    border-color: #871c04;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   }
   
   /* Style pour les boutons */
   .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #871c04;
+    border-color: #871c04;
     color: #fff;
     border-radius: 4px;
     padding: 10px;
     font-size: 16px;
     font-weight: 600;
   }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-  }
-  
 
+  .btn-primary:hover {
+    background-color: #871c04;
+    border-color: #871c04;
+  }
   
   /* Style pour les messages d'alerte */
   .alert {
@@ -82,15 +92,15 @@
   
   /* Style pour la case à cocher personnalisée */
   .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #007bff;
+    background-color: #871c04;
   }
   .custom-control-label {
     font-size: 14px;
-    color: #555;
+    color: #101010;
   }
   
   .custom-control-label::before {
-    border-color: #007bff;
+    border-color: #871c04;
   }
 
 
@@ -111,13 +121,13 @@
   .custom-control-label {
     margin-left: 8px;
     font-size: 14px;
-    color: #555;
+    color: #0c0c0c;
   }
   
   /* Style pour le lien "Forgot Password?" */
   .forgot-password {
     font-size: 14px;
-    color: #007bff;
+    color: #871c04;
     text-decoration: none;
   }
   
@@ -141,7 +151,19 @@
 }
 
 button.btn.btn-block {
-  background-color: #666666;
+  background-color: #000; /* Fond noir */
+  color: white; /* Texte blanc */
+}
+
+button.btn.btn-block:hover {
+  background-color:#b91c1c; /* Effet de survol rouge */
+  color: white;
+}
+.input-icon {
+  position: absolute;
+  top: 38px;
+  left: 12px;
+  color: #666;
 }
 
 .forgot-password {
@@ -168,6 +190,6 @@ a {
 }
 
 .form-group a:hover {
-  color: #007bff;         /* Couleur du lien au survol (optionnel) */
+  color: #871c04;         /* Couleur du lien au survol (optionnel) */
   text-decoration: underline; /* Maintenir le soulignement au survol */
 }

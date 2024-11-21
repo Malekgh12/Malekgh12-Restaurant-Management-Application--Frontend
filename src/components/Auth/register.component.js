@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
+//import { Navigate } from "react-router-dom";
 import CheckButton from "react-validation/build/button";
 
+import authService from "../../Service/auth.service";
 import '../Auth/register.css';
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -47,24 +49,6 @@ export default class Register extends Component {
     });
   }
 
-  onChangeFirstName(e) {
-    this.setState({
-      firstName: e.target.value
-    });
-  }
-
-  onChangeLastName(e) {
-    this.setState({
-      lastName: e.target.value
-    });
-  }
-
-  onChangeMobileNumber(e) {
-    this.setState({
-      mobileNumber: e.target.value
-    });
-  }
-
   handleRegister(e) {
     e.preventDefault();
 
@@ -72,6 +56,44 @@ export default class Register extends Component {
       message: "",
       successful: false
     });
+
+    authService.register(
+      this.state.username,
+      this.state.email,
+      this.state.password,
+      this.state.confirmPassword,
+    ).then(
+      response => {
+        this.setState({
+          message: response.data.message,
+          successful: true
+        });
+      },
+      error => {
+        // Ajout des vérifications pour éviter l'erreur
+      let resMessage = "Une erreur s'est produite, veuillez réessayer."; // Message par défaut
+
+      if (error.response) {
+        // La requête a été faite et le serveur a répondu avec un code d'erreur
+        if (error.response.data && error.response.data.message) {
+          resMessage = error.response.data.message; // Utilisation du message d'erreur du serveur
+        } else {
+          resMessage = error.response.statusText; // Utilisation du texte d'état HTTP
+        }
+      } else if (error.request) {
+        // La requête a été faite mais aucune réponse n'a été reçue
+        resMessage = "Aucune réponse du serveur.";
+      } else {
+        // Quelque chose s'est passé lors de la création de la requête
+        resMessage = error.message;
+      }
+
+      this.setState({
+        successful: false,
+        message: resMessagegit
+        });
+      }
+    );
 }
 
   render() {
@@ -91,7 +113,7 @@ export default class Register extends Component {
                   <div className="row">
                     <div className="col">
                       <label htmlFor="username">Username</label>
-                      <Input
+                      <input
                         type="text"
                         className="form-control"
                         name="username"
@@ -104,7 +126,7 @@ export default class Register extends Component {
 
                 <div className="form-group">
                   <label htmlFor="email">Email Address</label>
-                  <Input
+                  <input
                     type="text"
                     className="form-control"
                     name="email"
@@ -117,7 +139,7 @@ export default class Register extends Component {
                   <div className="row">
                     <div className="col">
                       <label htmlFor="password">Password</label>
-                      <Input
+                      <input
                         type="password"
                         className="form-control"
                         name="password"
@@ -128,7 +150,7 @@ export default class Register extends Component {
 
                     <div className="col">
                       <label htmlFor="confirmPassword">Confirm Password</label>
-                      <Input
+                      <input
                         type="password"
                         className="form-control"
                         name="confirmPassword"

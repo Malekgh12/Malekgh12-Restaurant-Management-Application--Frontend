@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import UserService from "../Service/user-service";
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -10,9 +12,21 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-        content: "Contenu public simulé"
-      });
+    UserService.getPublicContent().then(
+      response => {
+        this.setState({
+          content: response.data
+        });
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString()
+        });
+      }
+    );
   }
 
   render() {
@@ -24,4 +38,5 @@ export default class Home extends Component {
       </div>
     );
   }
+  
 }

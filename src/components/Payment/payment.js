@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import './payment.css';
 
 const PaymentSelection = ({ orderDetails, onPaymentSelect }) => {

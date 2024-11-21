@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
-import { useNavigate } from 'react-router-dom';
-
+import { saveReservation } from '../../Service/Reservationservice';
 import './AddReservation.css';
  
 function AddReservation() {
-    const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [reservationTime, setReservationTime] = useState('');
     const [formData, setFormData] = useState({
@@ -52,16 +50,16 @@ function AddReservation() {
         };
  
         console.log('Submitting reservation:', reservation);
-
-        setTimeout(() => {
-            setMessage('Reservation created successfully!');
-            resetForm();
-
-            const orderDetails = {
-                name: `Table Reservation for ${formData.numberOfGuests} guests`,
-            };
-            navigate('/payment', { state: { orderDetails } });
-        },500);
+ 
+        saveReservation(reservation)
+            .then(response => {
+                setMessage('Reservation created successfully!');
+                resetForm();
+            })
+            .catch(error => {
+                console.error('Error creating reservation:', error);
+                setMessage('Failed to create reservation. Please try again.');
+            });
     };
  
     const resetForm = () => {
@@ -133,3 +131,4 @@ function AddReservation() {
 }
  
 export default AddReservation;
+ 

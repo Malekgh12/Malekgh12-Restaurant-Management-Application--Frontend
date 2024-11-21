@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import UserService from "../Service/user-service";
 import EventBus from "../common/EventBus";
 
 export default class BoardUser extends Component {
@@ -12,16 +13,27 @@ export default class BoardUser extends Component {
   }
 
   componentDidMount() {
-    const response = { data: "Contenu de l'utilisateur" };
-    
-    this.setState({
-      content: response.data
-    });
-    const error = { response: { status: 401 } };
-    
-    if (error.response && error.response.status === 401) {
-      EventBus.dispatch("logout");
-    }
+    UserService.getUserBoard().then(
+      response => {
+        this.setState({
+          content: response.data
+        });
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+        });
+
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      }
+    );
   }
 
   render() {

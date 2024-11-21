@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './menu.css';
+import Menusservice from '../../Service/Menusservice';
 
 const Menu = () => {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ const Menu = () => {
     const [mealType, setMealType] = useState('Déjeuner');
     const [selectedItems, setSelectedItems] = useState([]);
 
-    const menuItems = {
+    const [menuItems, setMenuItems] =useState( {
         "Petit déjeuner": [
             {
                 id: 13,
@@ -92,8 +93,34 @@ const Menu = () => {
                 details: "Jus de fraise rafraîchissant et nutritif"
             }
         ]
-    };
-       
+    });
+    useEffect(() => {
+        const fetchMenuItems = async () => {
+            try {
+                const items = await Menusservice.getAllMenuItems();
+                // Organiser les items par catégorie
+                const categorizedItems = {
+                    "Petit déjeuner": [],
+                    "Plat Principal": [],
+                    "Entrée": [],
+                    "Dessert": [],
+                    "Boisson": []
+                };
+
+                items.forEach(item => {
+                    if (categorizedItems[item.category]) {
+                        categorizedItems[item.category].push(item);
+                    }
+                });
+
+                setMenuItems(categorizedItems);
+            } catch (error) {
+                console.error('Erreur lors du chargement du menu:', error);
+            }
+        };
+
+        fetchMenuItems();
+    }, []);
 
     const allItems = Object.values(menuItems).flat();
 
@@ -211,7 +238,9 @@ const Menu = () => {
                         <div className="item-details">
                             <h3 className="item-name">{item.name}</h3>
                             <p className="item-description">{item.details}</p>
-                            <p className="item-price">{item.price.toFixed(2)} D</p>
+                            <p className="item-prix">{item.price !== undefined && !isNaN(item.price) 
+                        ? `${item.price.toFixed(2)} D`
+                        : "Prix non disponible"}</p>
                             <span className="item-category">
                                 {item.category}
                             </span>
