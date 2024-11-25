@@ -4,10 +4,10 @@ import { saveReservation } from '../../Service/Reservationservice';
 import './AddReservation.css';
  
 function AddReservation() {
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [reservationTime, setReservationTime] = useState('');
+    const [selectedReservationDate, setSelectedReseravtionDate] = useState(null);
+    const [reservationDate, setReservationDate] = useState('');
     const [formData, setFormData] = useState({
-        numberOfGuests: '' // Store the number of guests
+        
     });
     const [step, setStep] = useState('selectDate');
     const [message, setMessage] = useState('');
@@ -22,12 +22,12 @@ function AddReservation() {
     };
  
     const handleDateChange = (date) => {
-        setSelectedDate(date);
+        setSelectedReseravtionDate(date);
         setStep('selectTime');
     };
  
     const handleTimeChange = (time) => {
-        setReservationTime(time);
+        setReservationDate(time);
     };
  
     const handleInputChange = (e) => {
@@ -43,9 +43,8 @@ function AddReservation() {
  
         // Construct the reservation object based on backend expectation
         const reservation = {
-            date: selectedDate ? selectedDate.toISOString().split('T')[0] : '', // Ensure LocalDate format
-            reservationTime: reservationTime, // Ensure LocalTime format (e.g., "18:30:00")
-            numberOfGuests: parseInt(formData.numberOfGuests, 10), // Convert to number
+            date: selectedReservationDate ? selectedReservationDate.toISOString().split('T')[0] : '', // Ensure LocalDate format
+            reservationDate: reservationDate, // Ensure LocalTime format (e.g., "18:30:00")
             userId: 1  // Add the userId if needed, otherwise remove it if handled by the backend
         };
  
@@ -63,11 +62,8 @@ function AddReservation() {
     };
  
     const resetForm = () => {
-        setSelectedDate(null);
-        setReservationTime('');
-        setFormData({
-            numberOfGuests: ''
-        });
+        setSelectedReseravtionDate(null);
+        setReservationDate('');
         setStep('selectDate');
         setMessage('');
     };
@@ -79,7 +75,7 @@ function AddReservation() {
                     <h1>PICK A DAY YOU LIKE</h1>
                     <Calendar
                         onChange={handleDateChange}
-                        value={selectedDate}
+                        value={selectedReservationDate}
                         minDate={today}
                     />
                 </div>
@@ -94,7 +90,7 @@ function AddReservation() {
                                 {timeOptions[meal].map((time, idx) => (
                                     <button
                                         key={idx}
-                                        className={`time-option ${reservationTime === time ? 'selected' : ''}`}
+                                        className={`time-option ${reservationDate === time ? 'selected' : ''}`}
                                         onClick={() => handleTimeChange(time)}
                                     >
                                         {time}
@@ -103,23 +99,9 @@ function AddReservation() {
                             </div>
                         </div>
                     ))}
-                    {reservationTime && (
+                    {reservationDate && (
                         <form onSubmit={handleSubmit} className="form-container">
-                            <div className="form-group custom-form-group">
-                                <label htmlFor="numberOfGuests">Number of Guests:</label>
-                                <select
-                                    id="numberOfGuests"
-                                    name="numberOfGuests"
-                                    value={formData.numberOfGuests}
-                                    onChange={handleInputChange}
-                                    required
-                                >
-                                    <option value=""></option>
-                                    {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
-                                        <option key={num} value={num}>{num}</option>
-                                    ))}
-                                </select>
-                            </div>
+                          
                             <button type="submit" className="btn btn-primary">Reserve My Table</button>
                         </form>
                     )}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
 //import { Navigate } from "react-router-dom";
+import { User, Mail, Lock, KeyRound } from "lucide-react";
 import CheckButton from "react-validation/build/button";
 
 import authService from "../../Service/auth.service";
@@ -64,8 +65,9 @@ export default class Register extends Component {
       this.state.confirmPassword,
     ).then(
       response => {
+        const message = response && response.data ? response.data.message || "Registration successful!" : "Registration successful!";
         this.setState({
-          message: response.data.message,
+          message: message,
           successful: true
         });
       },
@@ -90,7 +92,7 @@ export default class Register extends Component {
 
       this.setState({
         successful: false,
-        message: resMessagegit
+        message: resMessage
         });
       }
     );
@@ -112,7 +114,10 @@ export default class Register extends Component {
                 <div className="form-group">
                   <div className="row">
                     <div className="col">
-                      <label htmlFor="username">Username</label>
+                      <label htmlFor="username" className="d-flex align-items-center">
+                        <User className="me-2" size={18} />
+                      Username
+                      </label>
                       <input
                         type="text"
                         className="form-control"
@@ -125,7 +130,10 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email" className="d-flex align-items-center">
+                  <Mail className="me-2" size={18} />
+                  Email Address
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -138,7 +146,10 @@ export default class Register extends Component {
                 <div className="form-group">
                   <div className="row">
                     <div className="col">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="password" className="d-flex align-items-center">
+                      <Lock className="me-2" size={18} />
+                      Password
+                      </label>
                       <input
                         type="password"
                         className="form-control"
@@ -149,7 +160,10 @@ export default class Register extends Component {
                     </div>
 
                     <div className="col">
-                      <label htmlFor="confirmPassword">Confirm Password</label>
+                      <label htmlFor="confirmPassword" className="d-flex align-items-center">
+                      <KeyRound className="me-2" size={18} />
+                      Confirm Password
+                      </label>
                       <input
                         type="password"
                         className="form-control"

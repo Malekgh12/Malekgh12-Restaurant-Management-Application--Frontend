@@ -3,7 +3,7 @@ import authHeader from './auth-header';
 
 const API_URL = 'http://localhost:8086/api/test/';
 
-class UserService {
+class userService {
   getPublicContent() {
     return axios.get(API_URL + 'all');
   }
@@ -17,4 +17,4 @@ class UserService {
   }
 }
 
-export default new UserService();
+export default new userService();

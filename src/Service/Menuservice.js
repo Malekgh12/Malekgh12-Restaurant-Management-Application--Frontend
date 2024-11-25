@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8082/api/Menu'; // URL du backend Spring Boot Menu Service
 
-class MenuService {
+class Menuservice {
     // Récupérer tous les items du menu
     getAllMenuItems = async () => {
         try {
@@ -63,4 +63,4 @@ class MenuService {
     };
 }
 
-export default new MenuService();
+export default new Menuservice();

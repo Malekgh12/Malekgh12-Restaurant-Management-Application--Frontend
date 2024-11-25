@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './menu.css';
-import Menusservice from '../../Service/Menusservice';
+import Menuservice from '../../Service/Menuservice';
 
 const Menu = () => {
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ const Menu = () => {
 
     const [menuItems, setMenuItems] =useState( {
         "Petit déjeuner": [
+            
             {
                 id: 13,
                 name: "Petit-déjeuner tunisien : ",
@@ -97,7 +98,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchMenuItems = async () => {
             try {
-                const items = await Menusservice.getAllMenuItems();
+                const items = await Menuservice.getAllMenuItems();
                 // Organiser les items par catégorie
                 const categorizedItems = {
                     "Petit déjeuner": [],

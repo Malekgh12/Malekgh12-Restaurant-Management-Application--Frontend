@@ -10,7 +10,7 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: { username: "", email: "", roles: [] }
+      currentUser: { username: "", email: "", role: [] }
     };
   }
 
@@ -43,9 +43,7 @@ export default class Profile extends Component {
     }
 
     const { currentUser, userReady } = this.state;
-    if (!currentUser) {
-      this.setState({ redirect: "/home" });
-    }
+
     return (
       <div className="container profile">
         {userReady ? (
@@ -56,7 +54,7 @@ export default class Profile extends Component {
             <div className="role-container">
               <p><strong>Role:</strong></p>
               <ul>
-                {currentUser.roles && currentUser.roles.map((role, index) => (
+                {currentUser.role && currentUser.role.map((role, index) => (
                   <li key={index}>{this.getRoleLabel(role)}</li>
                 ))}
               </ul>

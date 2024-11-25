@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
 import './payment.css';
 
-const PaymentSelection = ({ orderDetails, onPaymentSelect }) => {
+const PaymentSelection = ({ onPaymentSelect = () => {} }) => {
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [confirmationMessage, setConfirmationMessage] = useState('');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (paymentMethod === 'card') {
+            setConfirmationMessage({
+                title: "Paiement validé",
+                description: "Votre paiement par carte d'abonnement a été effectué avec succès.",
+                type: "success"
+            });
+        } else if (paymentMethod === 'onsite') {
+            setConfirmationMessage({
+                title: "Paiement en attente",
+                description: "Votre paiement sera à effectuer sur place lors de votre visite au restaurant.",
+                type: "info"
+            });
+        }
+        
+        setShowConfirmation(true);
         onPaymentSelect(paymentMethod);
     };
 
@@ -16,15 +34,6 @@ const PaymentSelection = ({ orderDetails, onPaymentSelect }) => {
                     <h2 className="payment-title">Mode de Paiement</h2>
                 </div>
                 <div className="payment-content">
-                    <div className="order-summary">
-                        <h3 className="summary-title">Résumé de votre commande</h3>
-                        <div className="summary-details">
-                            <p>Plat: {orderDetails?.name}</p>
-                            <p>Prix: {orderDetails?.price?.toFixed(2)} D</p>
-                            <p>Catégorie: {orderDetails?.category}</p>
-                        </div>
-                    </div>
-
                     <form onSubmit={handleSubmit}>
                         <div className="payment-options">
                             <label className="payment-option">
@@ -69,6 +78,13 @@ const PaymentSelection = ({ orderDetails, onPaymentSelect }) => {
                         </div>
                     </form>
                 </div>
+                {showConfirmation && (
+                                        <div className={`confirmation-message ${confirmationMessage.type}`}>
+                                        <h3>{confirmationMessage.title}</h3>
+                                        <p>{confirmationMessage.description}</p>
+                                    </div>
+                                )}
+                
             </div>
         </div>
     );

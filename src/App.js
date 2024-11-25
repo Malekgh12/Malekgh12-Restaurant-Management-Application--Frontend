@@ -140,7 +140,7 @@ class App extends React.Component {
 {currentUser ? (
   <div className="navbar-nav ml-auto">
     <li className="nav-item">
-      <Link to="/Profile" className="nav-link">
+      <Link to="/profil" className="nav-link">
         Profile
       </Link>
     </li>
@@ -160,7 +160,7 @@ class App extends React.Component {
             <Route path="/" element={<Navigate to="/Auth/login" />} />
             <Route path="/Auth/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profil" element={Profile} />
+            <Route path="/profil" element={<Profile/>} />
             <Route path="/home" element={<Home/>}/>
             <Route path="/user" element={< BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
