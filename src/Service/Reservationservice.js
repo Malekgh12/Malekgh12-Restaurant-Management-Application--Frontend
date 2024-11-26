@@ -36,6 +36,10 @@ export const saveReservation = async (reservation) => {
                 'Content-Type': 'application/json'
             }
         });
+        if (!reservation.name || !reservation.date) {
+            throw new Error("Les données de réservation doivent contenir un nom et une date.");
+        }
+        
         return response.data;
     } catch (error) {
         console.error("Erreur lors de l'enregistrement de la réservation:", error.response ? error.response.data : error.message);

@@ -2,6 +2,10 @@ import React from "react";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import "./App.css";
 import logo from './assets/image/img.png';
+import image from './assets/image/image.jpeg';
+import images from './assets/image/images.jpeg';
+import faculté from './assets/image/faculte.jpeg';
+
 import authService from "./Service/auth.service";
 
 import Login from "./components/Auth/login.component";
@@ -109,6 +113,10 @@ class App extends React.Component {
         <nav className="navbar">
         <span className="navbar-brand">
            <img src={logo} alt="Reservation Restaurant" />
+           <img scr={image} alt="Exemple de restaurant"/>
+           <img scr={images} alt="Evenement" />
+           <img scr={faculté} alt="Faculté" />
+          
         </span>
           <div className="navbar-nav mr-auto">
   {showAdminBoard && (

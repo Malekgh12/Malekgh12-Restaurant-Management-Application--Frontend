@@ -11,7 +11,7 @@ export default class Home extends Component {
       content: ""
     };
   }
-
+  
   componentDidMount() {
     UserService.getPublicContent().then(
       response => {
@@ -35,7 +35,7 @@ export default class Home extends Component {
       <div className="container">
         <header className="jumbotron">
       <div className="image-container">
-          <img src={require('../assets/image/faculter.png').default} alt="Faculté" />
+          <img src={require('../assets/image/faculté.png').default} alt="Faculté" />
           <img src={require('../assets/image/image.jpeg').default} alt="Exemple de restaurant" />
           <img src={require('../assets/image/images.jpeg').default} alt="Evenement" />
       </div>
