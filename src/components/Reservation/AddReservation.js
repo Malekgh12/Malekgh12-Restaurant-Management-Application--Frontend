@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { saveReservation } from '../../Service/Reservationservice';
 import './AddReservation.css';
  
 function AddReservation() {
-    const [selectedReservationDate, setSelectedReseravtionDate] = useState(null);
+    const navigate = useNavigate(); // Créer une instance de navigate
+    const [selectedReservationDate, setSelectedReservationDate] = useState(null);
     const [reservationDate, setReservationDate] = useState('');
-    const [formData, setFormData] = useState({
-        
-    });
+
     const [step, setStep] = useState('selectDate');
     const [message, setMessage] = useState('');
     //ff
@@ -22,20 +22,12 @@ function AddReservation() {
     };
  
     const handleDateChange = (date) => {
-        setSelectedReseravtionDate(date);
+        setSelectedReservationDate(date);
         setStep('selectTime');
     };
  
     const handleTimeChange = (time) => {
         setReservationDate(time);
-    };
- 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
     };
  
     const handleSubmit = (e) => {
@@ -47,6 +39,11 @@ function AddReservation() {
             reservationDate: reservationDate, // Ensure LocalTime format (e.g., "18:30:00")
             userId: 1  // Add the userId if needed, otherwise remove it if handled by the backend
         };
+        // Vérification des données
+    if (!reservation.date || !reservation.reservationDate) {
+        setMessage('Veuillez sélectionner une date et une heure valides.');
+        return;
+    }
  
         console.log('Submitting reservation:', reservation);
  
@@ -54,6 +51,7 @@ function AddReservation() {
             .then(response => {
                 setMessage('Reservation created successfully!');
                 resetForm();
+                navigate('/payment'); // Redirection vers la page de paiement
             })
             .catch(error => {
                 console.error('Error creating reservation:', error);
@@ -62,7 +60,7 @@ function AddReservation() {
     };
  
     const resetForm = () => {
-        setSelectedReseravtionDate(null);
+        setSelectedReservationDate(null);
         setReservationDate('');
         setStep('selectDate');
         setMessage('');

@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './menu.css';
-import Menuservice from '../../Service/Menuservice';
+import Menusservice from '../../Service/Menuservice';
 
 const Menu = () => {
     const navigate = useNavigate();
@@ -12,11 +12,9 @@ const Menu = () => {
 
     const [menuItems, setMenuItems] =useState( {
         "Petit déjeuner": [
-            
             {
                 id: 13,
                 name: "Petit-déjeuner tunisien : ",
-                price: 6,
                 category: "Petit déjeuner",
                 details: "Œufs, olives, fromage, pain frais",
                 availableFor: ["Petit déjeuner"]
@@ -24,7 +22,6 @@ const Menu = () => {
             {
                 id: 14,
                 name: "petit-déjeuner continental : ",
-                price: 5,
                 category: "Petit déjeuner",
                 details: "Croissant, confiture, beurre, café",
                 availableFor: ["Petit déjeuner"]
@@ -34,14 +31,12 @@ const Menu = () => {
             {
                 id: 5,
                 name: "Couscous Poulet : ",
-                price: 8,
                 category: "Plat principal",
                 details: "Plat de couscous servi avec viande de poulet et légumes"
             },
             {
                 id: 6,
                 name: "Makrouna Poulet : ",
-                price: 8,
                 category: "Plat principal",
                 details: "Pâtes tunisiennes épicées avec sauce tomate et poulet"
             }
@@ -50,14 +45,12 @@ const Menu = () => {
             {
                 id: 7,
                 name: "Salade Méchouia : ",
-                price: 5,
                 category: "Entrée",
                 details: "Salade composée avec tomate, concombre, olives et œufs"
             },
             {
                 id: 12,
                 name: "Brick à l'œuf : ",
-                price: 4.5,
                 category: "Entrée",
                 details: "Brick croustillante farcie avec pomme de terre, thon et œuf"
             }
@@ -66,14 +59,12 @@ const Menu = () => {
             {
                 id: 8,
                 name: "Zriga Tunisienne : ",
-                price: 4,
                 category: "Dessert",
                 details: "Crème à base de lait, décorée avec des amandes"
             },
             {
                 id: 11,
                 name: "Outra (Gâteau tunisien)  : ",
-                price: 3,
                 category: "Dessert",
                 details: "Outra est un gâteau tunisien traditionnel préparé"
             }
@@ -82,14 +73,12 @@ const Menu = () => {
             {
                 id: 9,
                 name: "Citronnade Tunisienne : ",
-                price: 2.5,
                 category: "Boisson",
                 details: "Boisson rafraîchissante à base de jus de citron frais"
             },
             {
                 id: 10,
                 name: "Jus de Fraise : ",
-                price: 2.5,
                 category: "Boisson",
                 details: "Jus de fraise rafraîchissant et nutritif"
             }
@@ -98,7 +87,7 @@ const Menu = () => {
     useEffect(() => {
         const fetchMenuItems = async () => {
             try {
-                const items = await Menuservice.getAllMenuItems();
+                const items = await Menusservice.getAllMenuItems();
                 // Organiser les items par catégorie
                 const categorizedItems = {
                     "Petit déjeuner": [],
@@ -239,9 +228,6 @@ const Menu = () => {
                         <div className="item-details">
                             <h3 className="item-name">{item.name}</h3>
                             <p className="item-description">{item.details}</p>
-                            <p className="item-prix">{item.price !== undefined && !isNaN(item.price) 
-                        ? `${item.price.toFixed(2)} D`
-                        : "Prix non disponible"}</p>
                             <span className="item-category">
                                 {item.category}
                             </span>

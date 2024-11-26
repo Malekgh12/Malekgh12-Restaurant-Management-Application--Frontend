@@ -9,7 +9,6 @@ import Register from "./components/Auth/register.component";
 import AddReservation from "./components/Reservation/AddReservation";
 import Menu from "./components/Menu/menu";
 import Payment from "./components/Payment/payment";
-import Profile from "./components/Profile.component";
 import Home from "./components/home.component";
 import BoardUser from"./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
@@ -157,10 +156,9 @@ class App extends React.Component {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<Navigate to="/Auth/login" />} />
+            <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/Auth/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profil" element={<Profile/>} />
             <Route path="/home" element={<Home/>}/>
             <Route path="/user" element={< BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />

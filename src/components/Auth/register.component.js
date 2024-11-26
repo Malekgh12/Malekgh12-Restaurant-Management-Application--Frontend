@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
-//import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { User, Mail, Lock, KeyRound } from "lucide-react";
 import CheckButton from "react-validation/build/button";
 
@@ -22,7 +22,8 @@ export default class Register extends Component {
       password: "",
       confirmPassword: "",
       successful: false,
-      message: ""
+      message: "",
+      redirectToogin: false // État pour la redirection
     };
   }
 
@@ -68,7 +69,8 @@ export default class Register extends Component {
         const message = response && response.data ? response.data.message || "Registration successful!" : "Registration successful!";
         this.setState({
           message: message,
-          successful: true
+          successful: true,
+          redirectToLogin: true // Définir l'état de redirection
         });
       },
       error => {
@@ -99,6 +101,9 @@ export default class Register extends Component {
 }
 
   render() {
+    if (this.state.redirectToLogin) {
+      return <Navigate to="/Auth/login" />; // Redirection vers la page de connexion
+    }
     return (
       <div className="col-md-12">
        <div className="card card-container register">
